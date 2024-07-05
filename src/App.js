@@ -1,9 +1,8 @@
-import './App.css';
-import Productos from './components/Productos/Productos';
+import Catalogo from "./components/Catalogo/Catalogo";
 
 function App() {
   return (
-    <Productos />
+    <Catalogo />
   );
 }
 
