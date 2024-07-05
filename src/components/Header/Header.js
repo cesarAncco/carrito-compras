@@ -2,13 +2,13 @@
 const Header = () => {
   return (
     <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-        <a class="navbar-brand text-white">
-          <i class="bi bi-laptop"></i>
+      <nav className="navbar navbar-expand-lg navbar-light bg-dark">
+        <a className="navbar-brand text-white">
+          <i className="bi bi-laptop"></i>
           Mundo Laptop
         </a>
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-toggle="collapse"
           data-target="#navbarNav"
@@ -16,15 +16,15 @@ const Header = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
         <div
-          class="collapse navbar-collapse justify-content-end"
+          className="collapse navbar-collapse justify-content-end"
           id="navbarNav"
         >
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <button class="nav-link text-white">Catálogo</button>
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <button className="nav-link text-white">Catálogo</button>
             </li>
           </ul>
         </div>
