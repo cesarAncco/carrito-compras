@@ -13,6 +13,19 @@ const Productos = ({product, addToCart}) => {
         </div>
       </div>
     </div>
+    // <div className="product-card col-12 col-md-4 mb-4">
+    //   <div className="card">
+    //     <img src={product.image} className="card-img-top" alt={product.title} />
+    //     <div className="card-body">
+    //       <h5 className="card-title">{product.title}</h5>
+    //       <p className="card-text">{product.description}</p>
+    //       <p className="card-text">Precio: ${product.price}</p>
+    //       <button onClick={addToCart} className="btn btn-primary">
+    //         Añadir al carrito
+    //       </button>
+    //     </div>
+    //   </div>
+    // </div>
   );
 };
 

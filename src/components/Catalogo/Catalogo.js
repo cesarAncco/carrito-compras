@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import Productos from "../Productos/Productos";
 import Carro from "../Carro/Carro";
 import Total from "../Total/Total";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import { CarroContexto } from '../../components/CarroContexto/CarroContexto';
 import "./Catalogo.css";
 
 const products = [
@@ -67,75 +68,103 @@ const products = [
 ];
 
 const Catalogo = () => {
-  const [carro, setCarro] = useState([]);
-  const [total, setTotal] = useState({ cantidad: 0, monto: 0 });
+  // const [carro, setCarro] = useState([]);
+  // const [total, setTotal] = useState({ cantidad: 0, monto: 0 });
+
+  // const anadirCarro = (product) => {
+  //   setCarro((prevCart) => {
+  //     const existingProduct = prevCart.find((item) => item.id === product.id);
+
+  //     if (existingProduct) {
+  //       return prevCart.map((item) =>
+  //         item.id === product.id
+  //           ? { ...item, quantity: item.quantity + 1 }
+  //           : item
+  //       );
+  //     } else {
+  //       return [...prevCart, { ...product, quantity: 1 }];
+  //     }
+  //   });
+  //   actualizarTotal(product, "anadir");
+  // };
+
+  // const quitarCarrito = (product) => {
+  //   setCarro((prevCart) => {
+  //     const existingProduct = prevCart.find((item) => item.id === product.id);
+  //     if (existingProduct) {
+  //       return prevCart.map((item) =>
+  //         item.id === product.id
+  //           ? { ...item, quantity: item.quantity - 1 }
+  //           : item
+  //       );
+  //     }
+  //   });
+  //   actualizarTotal(product, "quitar");
+  // };
+
+  // const eliminarCarrito = (product) => {
+  //   setCarro((prevCart) => {
+  //     const existingProduct = prevCart.find((item) => item.id === product.id);
+  //     if (existingProduct) {
+  //       return prevCart.map((item) =>
+  //         item.id === product.id ? { ...item, quantity: 0 } : item
+  //       );
+  //     }
+  //   });
+  //   actualizarTotal(product, "eliminar");
+  // };
+
+  // const actualizarTotal = (product, condicion) => {
+  //   setTotal((prevTotal) => {
+  //     switch (condicion) {
+  //       case "anadir":
+  //         return {
+  //           cantidad: prevTotal.cantidad + 1,
+  //           monto: prevTotal.monto + product.price,
+  //         };
+  //       case "quitar":
+  //         return {
+  //           cantidad: prevTotal.cantidad - 1,
+  //           monto: prevTotal.monto - product.price,
+  //         };
+  //       case "eliminar":
+  //         const precio = product.price * product.quantity;
+  //         return {
+  //           cantidad: prevTotal.cantidad - product.quantity,
+  //           monto: prevTotal.monto - precio,
+  //         };
+  //       default:
+  //         return prevTotal;
+  //     }
+  //   });
+  // };
+  // const [products, setProducts] = useState([]);
+  const { state, dispatch } = useContext(CarroContexto);
+
+  // useEffect(() => {
+  //   // Función para obtener productos desde la API
+  //   const fetchProducts = async () => {
+  //     try {
+  //       const response = await axios.get('https://fakestoreapi.com/products');
+  //       setProducts(response.data);
+  //     } catch (error) {
+  //       console.error('Error fetching products:', error);
+  //     }
+  //   };
+
+  //   fetchProducts();
+  // }, []);
 
   const anadirCarro = (product) => {
-    setCarro((prevCart) => {
-      const existingProduct = prevCart.find((item) => item.id === product.id);
-
-      if (existingProduct) {
-        return prevCart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      } else {
-        return [...prevCart, { ...product, quantity: 1 }];
-      }
-    });
-    actualizarTotal(product, "anadir");
+    dispatch({ type: 'ANADIR_CARRO', product });
   };
 
   const quitarCarrito = (product) => {
-    setCarro((prevCart) => {
-      const existingProduct = prevCart.find((item) => item.id === product.id);
-      if (existingProduct) {
-        return prevCart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity - 1 }
-            : item
-        );
-      }
-    });
-    actualizarTotal(product, "quitar");
+    dispatch({ type: 'QUITAR_CARRO', product });
   };
 
   const eliminarCarrito = (product) => {
-    setCarro((prevCart) => {
-      const existingProduct = prevCart.find((item) => item.id === product.id);
-      if (existingProduct) {
-        return prevCart.map((item) =>
-          item.id === product.id ? { ...item, quantity: 0 } : item
-        );
-      }
-    });
-    actualizarTotal(product, "eliminar");
-  };
-
-  const actualizarTotal = (product, condicion) => {
-    setTotal((prevTotal) => {
-      switch (condicion) {
-        case "anadir":
-          return {
-            cantidad: prevTotal.cantidad + 1,
-            monto: prevTotal.monto + product.price,
-          };
-        case "quitar":
-          return {
-            cantidad: prevTotal.cantidad - 1,
-            monto: prevTotal.monto - product.price,
-          };
-        case "eliminar":
-          const precio = product.price * product.quantity;
-          return {
-            cantidad: prevTotal.cantidad - product.quantity,
-            monto: prevTotal.monto - precio,
-          };
-        default:
-          return prevTotal;
-      }
-    });
+    dispatch({ type: 'ELIMINAR_CARRO', product });
   };
 
   return (
@@ -168,7 +197,7 @@ const Catalogo = () => {
           <div className="col-12 col-md-2 mb-4">
             <div id="product-carrito">
               <p>Carrito de Compras</p>
-              {carro.map((item, index) => (
+              {state.carro.map((item, index) => (
                 <Carro
                   key={index}
                   product={item}
@@ -182,7 +211,7 @@ const Catalogo = () => {
           <div className="col-12 col-md-2 mb-4">
             <div id="price">
               <p>Total</p>
-              <Total total={total} />
+              <Total total={state.total} />
             </div>
           </div>
         </div>

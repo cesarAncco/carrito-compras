@@ -10,9 +10,9 @@ const Carro = ({ product, addToCart, quitarCarrito, eliminarCarrito }) => {
           <p id="amount" className="card-text">
             Cantidad: {product.quantity}
           </p>
-          <button className="btn btn-primary p-1 m-1" onClick={() => addToCart(product)}><i class="bi bi-plus-lg"></i></button>
-          <button className="btn btn-danger p-1 m-1" onClick={() => quitarCarrito(product)}><i class="bi bi-x"></i></button>
-          <button className="btn btn-secondary p-1 m-1" onClick={() => eliminarCarrito(product)} ><i class="bi bi-trash"></i></button>
+          <button className="btn btn-primary p-1 m-1" onClick={() => addToCart(product)}><i className="bi bi-plus-lg"></i></button>
+          <button className="btn btn-danger p-1 m-1" onClick={() => quitarCarrito(product)}><i className="bi bi-x"></i></button>
+          <button className="btn btn-secondary p-1 m-1" onClick={() => eliminarCarrito(product)} ><i className="bi bi-trash"></i></button>
         </div>
       </div>
     </div>
